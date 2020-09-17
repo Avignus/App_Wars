@@ -1,12 +1,16 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import {LanguageProvider} from 'react-native-translation';
 import MyStack from './routes';
 
 function App() {
     return (
-        <NavigationContainer>
-            <MyStack/>
-        </NavigationContainer>
+
+        <LanguageProvider language={'pt-BR'}>
+            <NavigationContainer>
+                <MyStack/>
+            </NavigationContainer>
+        </LanguageProvider>
     )
 }
 

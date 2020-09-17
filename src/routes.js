@@ -6,7 +6,10 @@ import SplashScreen from './screens/Splash/Splash';
 import Index from './screens/Index/Index';
 import Detail from './screens/Detail/Detail';
 import DetailCharacter from './screens/Detail/DetailCharacter/DetailCharacter';
-
+import DetailPlanets from './screens/Detail/DetailPlanets/DetailPlanets';
+import DetailStarships from './screens/Detail/DetailStarships/DetailStarships';
+import DetailVehicles from './screens/Detail/DetailVehicles/DetailVehicles';
+import DetailSpecies from './screens/Detail/DetailSpecies/DetailSpecies';
 const Stack = createStackNavigator();
 
 function MyStack() {
@@ -30,6 +33,22 @@ function MyStack() {
             <Stack.Screen
                 name="Detail"
                 component={Detail}
+            />
+            <Stack.Screen 
+                name="DetailPlanet"
+                component={DetailPlanets}
+            />
+            <Stack.Screen 
+                name="DetailStarship"
+                component={DetailStarships}
+            />
+            <Stack.Screen 
+                name="DetailVehicles"
+                component={DetailVehicles}
+            />
+            <Stack.Screen 
+                name="DetailSpecies"
+                component={DetailSpecies}
             />
         </Stack.Navigator>
     )
