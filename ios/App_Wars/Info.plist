@@ -38,7 +38,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -53,5 +53,15 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Starjedi.ttf</string>
+		<string>Starjhol.ttf</string>
+		<string>Starjout.ttf</string>
+		<string>STJEDISE.TTF</string>
+		<string>Stjldbl1.ttf</string>
+		<string>Stjldbl2.ttf</string>
+		<string>Strjmono.ttf</string>
+	</array>
 </dict>
 </plist>

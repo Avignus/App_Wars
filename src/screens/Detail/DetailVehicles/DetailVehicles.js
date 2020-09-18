@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 const DetailVehicles = ({route, navigation}) => {
     const [detailVehicle, setVehicleDetail] = useState(route.params.vehicle);
@@ -7,6 +7,8 @@ const DetailVehicles = ({route, navigation}) => {
     const [values, setValues] = useState([]);
     const [pilots, setPilots] = useState([]);
     const [movies, setMovies] = useState([]);
+    const windowWidth = Dimensions.get('window').width;
+
     const getData = () => {
         let attributes = Object.keys(detailVehicle); 
         let values = Object.values(detailVehicle);
@@ -80,34 +82,65 @@ const DetailVehicles = ({route, navigation}) => {
         )
     }
 
+    const rowContainer = {
+        justifyContent: 'center', 
+        flexDirection: 'row', 
+        width: windowWidth, 
+        backgroundColor: 'transparent'
+    }
+    const labelStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: '#E9D437', 
+        width: '50%', 
+        height: 30, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+    const textStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: 'lightblue', 
+        width: '50%', 
+        height: 30, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+
+
     console.log(pilots, 'pilotos')
     return (
-        <View>
-            <Text>
-                Detalhes do veículo
-            </Text>
-            <TouchableOpacity onPress={() => getData()}>
-                <Text>Atributos</Text>
-            </TouchableOpacity>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-                <View>
-                    {attributes.map((attribute, index) => (
-                        <Text key={index}>{attribute}</Text>
-                    ))}
+        <ScrollView>
+            <View>
+                <View style={{justifyContent: 'center', alignItems: 'center', height: '4%', width: windowWidth, backgroundColor: 'transparent'}}>
+                    <Text style={{fontSize: 18}}>Detalhes do veículo</Text>
                 </View>
-                <View>
-                    {values.map((value, index) => (
-                        <Text key={index}>{value}</Text>
-                    ))}
-                    <Text>Pilotos</Text>
-                    {getPilots()}
-                    <View style={{backgroundColor: 'purple'}}>
-                        <Text>Filmes</Text>
-                        {getMovies()}
+                <View style={{display: 'flex', flexDirection: 'row'}}>
+                    <View>
+                        {attributes.map((attribute, index) => (
+                            <Text key={index}>{attribute}</Text>
+                        ))}
+                    </View>
+                    <View>
+                        {values.map((value, index) => (
+                            <Text key={index}>{value}</Text>
+                        ))}
+                        <Text>Pilotos</Text>
+                        {getPilots()}
+                        <View style={{backgroundColor: 'purple'}}>
+                            <Text>Filmes</Text>
+                            {getMovies()}
+                        </View>
                     </View>
                 </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

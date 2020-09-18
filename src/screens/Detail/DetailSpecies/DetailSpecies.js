@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const DetailSpecies = ({route, navigation}) => {
@@ -49,7 +49,6 @@ const DetailSpecies = ({route, navigation}) => {
         setLoading(true);
         const people = route.params.specie.people;
         let listOfPeopleUrl = [];
-        listOfElements = [];
         const peoplePromises = [];
         people.map(peopleUrl => listOfPeopleUrl.push(peopleUrl))
         for (let i = 0; i < people.length; i++) {
@@ -71,9 +70,9 @@ const DetailSpecies = ({route, navigation}) => {
         let listOfMovies = [];
         const moviesPromises = [];
 
-        for (let i = 1; i <= movies.length; i++) {
+        for (let i = 0; i < movies.length; i++) {
             console.log(i);
-            moviesPromises.push(fetch(getMoviesUrl(i)).then(response => response.json()));            
+            moviesPromises.push(fetch(movies[i]).then(response => response.json()));            
         }
         await Promise.all(moviesPromises)
             .then((response) => response.forEach(function(movie) {
@@ -85,7 +84,9 @@ const DetailSpecies = ({route, navigation}) => {
     const getValues = (values) => {
         return (
             values.map((item, index) => (
-                <Text key={index}>{item}</Text>
+                <View key={index} style={{width: '50%', height: 105}}>
+                    <Text style={textStyle}>{item}</Text>
+                </View>
             ))
         )   
     }
@@ -93,9 +94,36 @@ const DetailSpecies = ({route, navigation}) => {
     const getAttributes = (attributes) => {
         return (
             attributes.map((item, index) => (
-                <Text key={index}>{item}</Text>
+                <View key={index} style={{width: '100%', backgroundColor: 'purple', height: 100, justifyContent: 'flex-start'}}>
+                    <Text style={labelStyle}>{item}</Text>
+                </View>
             ))
         )
+    }
+
+    const labelStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: '#E9D437', 
+        width: '100%', 
+        height: 40, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+    const textStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: 'lightblue', 
+        width: '100%', 
+        height: 80, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
     }
 
     const getPeople = () => {
@@ -135,47 +163,31 @@ const DetailSpecies = ({route, navigation}) => {
     }
     console.log(listOfPeople, 'lista de pessoas')
     return (
-        
-        <View>
-                {loading ?
-                    <Spinner visible={loading} color="white"/>
-                    :
-                    <View style={{display: 'flex', flexDirection: 'row'}}>
-                        <View>
-                            {getAttributes(attributes)}
-                        </View>
-                            
-                        <View>
-                            {getValues(values)}
-                        </View>
-                        
-                    </View>
-                    
-                }
-                <View >
-                    <View style={{display: 'flex', flexDirection: 'row'}}>
-                        <View style={{backgroundColor: 'purple', width: '50%'}}>
-                            <Text>Pessoas</Text>
-                        </View>
-                        <View>
-                            <Text>Filmes</Text>
-                        </View>
-                    </View>
-                    <View style={{display: 'flex', flexDirection: 'row'}}>
-                        <View style={{backgroundColor: 'orange', width: '50%'}}>
-                            {getPeople(listOfPeople)}
-                        </View>
-                        <View>
-                            {getMovies(movies)}
-                        </View>
-                    </View>
+        <ScrollView>
+            <Spinner visible={loading} color="white"/>
+            <View style={{flexDirection: 'row', backgroundColor: 'orange', height: '72%'}}>
+                {/* <View>
+                    {getPeople()}
+                </View> */}
+                <View style={{width: '40%', paddingLeft: 20, backgroundColor: 'green', alignItems: 'center', justifyContent: 'flex-start'}}>
+                    {getAttributes(attributes)}
                 </View>
+                <View style={{width: '50%', paddingLeft: 20, alignItems: 'center', justifyContent: 'flex-start', backgroundColor: 'transparent', height: 300, paddingTop: 2}}>
+                    {getValues(values)}
+                </View>
+            </View>
+            <View style={{flexDirection: 'row', backgroundColor: 'purple'}}>
+                <View style={{width: '50%', height: 350, paddingLeft: 20}}>
+                    <Text>Indivíduos</Text>
+                    {getPeople()}
+                </View>
+                <View style={{width: '50%'}}>
+                    <Text>Filmes</Text>
+                    {getMovies(movies)}
+                </View>
+            </View>
+        </ScrollView>
 
-                <View style={{display: 'flex', flexDirection: 'row'}}>
-                    
-                </View>
-        </View>
     )
 }
-
-export default DetailSpecies
+export default DetailSpecies;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { Dimensions, ScrollView, View, Text, TouchableOpacity } from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 const DetailPlanet = ({route, navigation}) => {
@@ -7,6 +7,7 @@ const DetailPlanet = ({route, navigation}) => {
     const [residents, setResidents] = useState([]);
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(false);
+    const windowWidth = Dimensions.get('window').width;
 
     useEffect(() => {
         fetchResidents()
@@ -34,13 +35,13 @@ const DetailPlanet = ({route, navigation}) => {
         return (
             residents.map((resident, index) => (
                 <TouchableOpacity
-                    style={{marginTop: 10}}
+                    style={{marginTop: 2}}
                     key={index}
                     onPress={() => navigation.navigate('DetailCharacter', {
                         character: resident
                     })}
                 >
-                    <Text style={{fontSize: 18, color: 'pink'}}>{resident.name}</Text>
+                    <Text style={{fontSize: 18, color: '#E9D437'}}>{resident.name} (Detalhar)</Text>
                 </TouchableOpacity>
             ))
         )
@@ -72,39 +73,92 @@ const DetailPlanet = ({route, navigation}) => {
                         character: movie
                     })}
                 >
-                    <Text style={{fontSize: 18, color: 'pink'}}>{movie.title}</Text>
+                    <Text style={{fontSize: 18, color: '#E9D437'}}>{movie.title} (Detalhar)</Text>
                 </TouchableOpacity>
             ))
         )
     }
 
+    const rowContainer = {
+        justifyContent: 'center', 
+        flexDirection: 'row', 
+        width: windowWidth, 
+        backgroundColor: 'transparent'
+    }
+    const labelStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: '#E9D437', 
+        width: '50%', 
+        height: 30, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+    const textStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: 'lightblue', 
+        width: '50%', 
+        height: 30, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+
     return (
         <ScrollView>
-            {loading ? 
-            <Spinner visible={loading} color="white"/>
-            :
             <View>
-                <Text>Detalhes do planeta</Text>
-                <TouchableOpacity onPress={console.log(planetDetail)}>
-                </TouchableOpacity>
-                <Text>Detalhes</Text>
-                <Text>Nome: {planetDetail.name}</Text>
-                <Text>Tempo de rotação: {planetDetail.rotation_period} + dias</Text>
-                <Text>Diâmetro: {planetDetail.diameter}</Text>
-                <Text>Clima: {planetDetail.climate}</Text>
-                <Text>Terreno: {planetDetail.terrain}</Text>
-                <Text>Superfície de água: {planetDetail.surface_water}</Text>
-                <Text>População: {planetDetail.population}</Text>
-                <Text>Moradores</Text>
-                <View style={{backgroundColor: 'blue', height: 170, width: '100%'}}>
-                    {getResidents()}
+                <View style={{justifyContent: 'center', alignItems: 'center', height: '4%', width: windowWidth, backgroundColor: 'transparent'}}>
+                    <Text style={{fontSize: 18}}>Detalhes do planeta</Text>
                 </View>
-                <Text>Filmes</Text>
-                <View style={{backgroundColor: 'orange', height: 170, width: '100%'}}>
-                    {getMovies()}
+                <View style={{ justifyContent: 'space-around', height: '96%', width: windowWidth, backgroundColor: 'transparent'}}>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Nome: </Text>
+                        <Text style={textStyle}>{planetDetail.name}</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Tempo de rotação:</Text>
+                        <Text style={textStyle}>{planetDetail.rotation_period} dias</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Diâmetro:</Text>
+                        <Text style={textStyle}>{planetDetail.diameter}</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Clima:</Text>
+                        <Text style={textStyle}>{planetDetail.climate}</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Tempo de rotação:</Text>
+                        <Text style={textStyle}>{planetDetail.rotation_period} dias</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Terreno: </Text>
+                        <Text style={textStyle}>{planetDetail.terrain}</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>Superfície de água: </Text>
+                        <Text style={textStyle}>{planetDetail.surface_water}</Text>
+                    </View>
+                    <View style={rowContainer}>
+                        <Text style={labelStyle}>População: </Text>
+                        <Text style={textStyle}>{planetDetail.population}</Text>
+                    </View>
+                    <Text style={{fontSize: 18}}>Moradores</Text>
+                    <View style={{backgroundColor: 'rgba(52, 52, 52, 0.8)', width: '100%'}}>
+                        {getResidents()}
+                    </View>
+                    <Text style={{fontSize: 18}}>Filmes</Text>
+                    <View style={{backgroundColor: 'rgba(52, 52, 52, 0.8)', width: '100%'}}>
+                        {getMovies()}
+                    </View>
                 </View>
             </View>
-            }
         </ScrollView>
     )
 }

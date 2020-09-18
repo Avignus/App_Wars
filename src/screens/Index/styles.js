@@ -1,44 +1,54 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
     titleContainer: { 
-        height: 50, 
-        backgroundColor: 'blue',
+        height: '40%', 
+        backgroundColor: 'transparent',
         alignItems: 'center', 
-        justifyContent: 'center'
+        justifyContent: 'flex-end'
     },
     titleStyle: { 
         fontFamily: 'Montserrat-Medium',
-        fontSize: 30
+        fontSize: 30,
+        color: 'white',
     },
     options: { 
         alignItems: 'center', 
-        width: '100%', 
-        flex: 1,
-        backgroundColor: 'orange'
+        justifyContent: 'center', 
+        width: windowWidth * 6, 
+        backgroundColor: 'transparent'
     },
     buttonOptions: {
         marginTop: 8,
-        backgroundColor: 'lightblue',
-        width: 170,
-        height: 163,
-        borderRadius: 18,
-        paddingLeft: 20
+        backgroundColor: 'rgba(90, 90, 90, 0.8)',
+        width: windowWidth - 40,
+        paddingLeft: 20,
+        height: '30%', 
+        justifyContent: 'center',
+        borderWidth: 0.8, 
+        borderColor: 'white',
+        borderRadius: 14
     },
     listContainer: { 
-        flex: 1,
-        justifyContent: 'space-around',
         backgroundColor: 'transparent',
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        height: '100%',
     },
     listItem: { 
         fontFamily: 'Montserrat-Medium',
-        fontSize: 14,
+        fontSize: 24,
+        color: 'gold',
         textAlign: 'center'
+    },
+    information: { 
+        color: 'white'
+    },
+    label: { 
+        color: 'orange'
     }
 })
 

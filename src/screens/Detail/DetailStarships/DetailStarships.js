@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
 
 
 const DetailStarship = ({route, navigation}) => {
@@ -71,7 +71,7 @@ const DetailStarship = ({route, navigation}) => {
         return (
             movies.map((movie, index) => (
                 <TouchableOpacity
-                    style={{marginTop: 10}}
+                    style={{marginTop: 10, paddingLeft: 20}}
                     key={index}
                     onPress={() => navigation.navigate('DetailPlanet', {
                         character: movie
@@ -84,8 +84,34 @@ const DetailStarship = ({route, navigation}) => {
     }
 
     console.log(pilots, 'pilotos de nave')
+
+    const labelStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: '#E9D437', 
+        width: '100%', 
+        height: 40, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+    const textStyle = {
+        paddingLeft: 5,
+        paddingTop: 5,
+        color: 'black', 
+        fontSize: 15,
+        backgroundColor: 'lightblue', 
+        width: '100%', 
+        height: 40, 
+        borderWidth: 0.5, 
+        borderColor: 'black', 
+        marginTop: 10
+    }
+
     return (
-        <View>
+        <ScrollView>
             {/* <Text>Detalhes da nave</Text>
             <Text>Nome: {starshipDetail.name}</Text>
             <Text>Modelo: {starshipDetail.model}</Text>
@@ -100,24 +126,28 @@ const DetailStarship = ({route, navigation}) => {
             <Text>Rating hyperdrive: {starshipDetail.hyperdrive_rating}</Text>
             <Text>MGLT: {starshipDetail.MGLT}</Text>
              */}
-             <Text>Detalhes do veículo</Text>
-            <View style={{display: 'flex', flexDirection: 'row'}}>
-                <View>
+             <Text style={{fontSize: 18, textAlign: 'center'}}>Detalhes da nave</Text>
+            <View style={{backgroundColor: 'transparent', flexDirection: 'row', width: '100%'}}>
+                <View style={{width: '50%'}}>
                     {attributes.map((item, index) => (
-                        <Text key={index}>{item}</Text>
+                        <Text style={labelStyle} key={index}>{item}</Text>
                         ))}
                 </View>
-                <View>
+                <View style={{width: '50%'}}>
                     {values.map((item, index) => (
-                        <Text key={index}>{item}</Text> 
+                        <Text style={textStyle} key={index}>{item}</Text> 
                     ))}
                 </View>
             </View>
-            <Text>Pilotos</Text>
-            {getPilots()}
-            <Text>Filmes</Text>
-            {getMovies()}
-        </View>
+            <View style={{backgroundColor: 'rgba(52, 52, 52, 0.8)', width: '100%'}}>
+                <Text style={{fontSize: 18, paddingLeft: 10}}>Pilotos</Text>
+                {getPilots()}
+            </View>
+            <View style={{backgroundColor: 'rgba(52, 52, 52, 0.8)', width: '100%'}}>
+                <Text style={{paddingLeft: 10, fontSize: 18}}>Filmes</Text>
+                {getMovies()}
+            </View>
+        </ScrollView>
     )
 }
 
